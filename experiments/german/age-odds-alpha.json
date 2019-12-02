@@ -1,0 +1,21 @@
+{
+  "Xtrain": "data/german/X_train.pkl",
+  "Xvalid": "data/german/X_valid.pkl",
+  "Xtest": "data/german/X_test.pkl",
+  "ytrain": "data/german/y_train.pkl",
+  "yvalid": "data/german/y_valid.pkl",
+  "ytest": "data/german/y_test.pkl",
+  "ztrain": "data/german/age_train.pkl",
+  "zvalid": "data/german/age_valid.pkl",
+  "ztest": "data/german/age_test.pkl",
+  "method": "odds",
+  "num_classes": 11,
+  "hyperparams": {
+    "learning_rate": [1e-3],
+    "num_iters": [3000],
+    "n_h": [10],
+    "n_h_adv": [10],
+    "dropout_rate": [0.5],
+    "alpha": [0.1, 1, 10, 100, 300, 500, 700, 900]
+  }
+}
