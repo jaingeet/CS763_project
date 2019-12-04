@@ -129,9 +129,9 @@ class Model(object):
         data['Xtest'] = Variable(torch.Tensor(self.params['Xtest']))
         data['ytest'] = Variable(torch.Tensor(np.expand_dims(np.asarray(self.params['ytest']), 1)))
 
-        data['ztrain'] = Variable(torch.Tensor(self.params['ztrain']))
-        data['zvalid'] = Variable(torch.Tensor(self.params['zvalid']))
-        data['ztest'] = Variable(torch.Tensor(self.params['ztest']))
+        data['ztrain'] = Variable(torch.Tensor(self.params['ztrain']).long())
+        data['zvalid'] = Variable(torch.Tensor(self.params['zvalid']).long())
+        data['ztest'] = Variable(torch.Tensor(self.params['ztest']).long())
 
         return data
 
