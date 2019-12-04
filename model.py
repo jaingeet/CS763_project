@@ -243,7 +243,7 @@ class Model(object):
             if self.method == 'parity':
                 adv_input_test = ypred_test
             elif self.method == 'odds':
-                adv_input_test = torch.cat((ypred_test, ytrain), 1)
+                adv_input_test = torch.cat((ypred_test, ytest), 1)
             elif self.method == 'opportunity':
                 adv_input_test = torch.stack((torch.masked_select(ypred_test, self.data['adv_test_mask']),
                                              torch.masked_select(ytest, self.data['adv_test_mask'])), 1)
