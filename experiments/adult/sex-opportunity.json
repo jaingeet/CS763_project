@@ -11,11 +11,11 @@
   "method": "opportunity",
   "num_classes": 2,
   "hyperparams": {
-    "learning_rate": [1e-3, 1e-2, 1e-1],
-    "num_iters": [2000],
-    "n_h": [10, 100],
+    "learning_rate": [1e-3],
+    "num_iters": [3000],
+    "n_h": [10],
     "n_h_adv": [10],
-    "dropout_rate": [0.2, 0.5],
-    "alpha": [1]
+    "dropout_rate": [0.5],
+    "alpha": [10]
   }
 }

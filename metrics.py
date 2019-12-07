@@ -17,9 +17,9 @@ def get_metrics(y_pred, y, z, hyperparams, k = 2, y_select = 0, evaluation_file 
     # performance metrics
     pred = predict(y_pred)
     metrics['accuracy'] = get_accuracy(pred, y)
-    if zpred is not None:
-        zpred_label = predict(zpred)
-        metrics['z-accuracy'] = get_accuracy(zpred_label, z)
+    # if zpred is not None:
+    #     zpred_label = predict(zpred)
+    #     metrics['z-accuracy'] = get_accuracy(zpred_label, z)
     metrics['roc_auc'] = roc_auc_score(y, y_pred) # CAN TAKE IN ARRAYS?
     # metrics['roc_curve_fpr'], metrics['roc_curve_tpr'], metrics['roc_curve_thresholds'] = roc_curve(y, y_pred, pos_label=1)
 
@@ -27,10 +27,10 @@ def get_metrics(y_pred, y, z, hyperparams, k = 2, y_select = 0, evaluation_file 
     for i in range(k):
         # metrics['conditional_roc_auc_' + str(i)] = roc_auc_score(y[z == i], y_pred[z == i])
         # metrics['conditional_roc_curve_fpr'], metrics['conditional_roc_curve_tpr'], metrics['conditional_roc_curve_thresholds'] = \
-        roc_curve(y[z == i], y_pred[z == i], pos_label=1)
+        # roc_curve(y[z == i], y_pred[z == i], pos_label=1)
         metrics['count_' + str(i)] = np.sum(z == i)
         metrics['y_hat_' + str(i)] = np.sum(pred[z == i] == y_select)/np.sum(z == i)
-        metrics['accuracy_' + str(i)] = get_accuracy(pred[z == i], y[z == i]) # WATCH OUT - DOESN'T COUNT INSTANCES WHERE PREDICT i BUT ISN'T ACTUALLY i
+        # metrics['accuracy_' + str(i)] = get_accuracy(pred[z == i], y[z == i]) # WATCH OUT - DOESN'T COUNT INSTANCES WHERE PREDICT i BUT ISN'T ACTUALLY i
         metrics['true_neg_' + str(i)], metrics['false_neg_' + str(i)], metrics['false_pos_' + str(i)], metrics['true_pos_' + str(i)]  = \
         confusion_matrix(pred[z == i], y[z == i])
         metrics['fp_' + str(i)] = metrics['false_pos_' + str(i)] / (metrics['false_pos_' + str(i)] + metrics['true_neg_' + str(i)])
@@ -53,7 +53,12 @@ def predict(prob):
 
 
 def get_accuracy(y_pred, y):
-    return np.sum(1 for i in range(len(y)) if (y_pred[i] == y[i])) / len(y)
+    sum = 0
+    for i in range(len(y)):
+        if y_pred[i] == y[i]:
+            sum = sum + 1
+
+    return sum/len(y)
 
 
 # 1 - METRICS FROM WADSWORTH PAPER

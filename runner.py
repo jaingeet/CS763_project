@@ -3,7 +3,6 @@ import json
 import os
 import pandas as pd
 from model import Model
-import pickle
 
 
 class Runner(object):
@@ -22,7 +21,7 @@ class Runner(object):
             model.load_trained_models()
         else:
             model.train()
-        # model.eval()
+        model.eval()
 
     def get_parser(self):
         parser = argparse.ArgumentParser(description='Run FAD experiments')
@@ -49,15 +48,15 @@ class Runner(object):
         self.num_classes = config['num_classes']
 
     def load_data(self):
-        self.Xtrain = list((pickle.load(open(self.Xtrain_file, 'rb'))).values)
-        self.ytrain = list((pickle.load(open(self.ytrain_file, 'rb'))).values)
-        self.Xvalid = list((pickle.load(open(self.Xvalid_file, 'rb'))).values)
-        self.yvalid = list((pickle.load(open(self.yvalid_file, 'rb'))).values)
-        self.Xtest = list((pickle.load(open(self.Xtest_file, 'rb'))).values)
-        self.ytest = list((pickle.load(open(self.ytest_file, 'rb'))).values)
-        self.ztrain = list((pickle.load(open(self.ztrain_file, 'rb'))).values)
-        self.zvalid = list((pickle.load(open(self.zvalid_file, 'rb'))).values)
-        self.ztest = list((pickle.load(open(self.ztest_file, 'rb'))).values)
+        self.Xtrain = pd.read_pickle(self.Xtrain_file)
+        self.ytrain = pd.read_pickle(self.ytrain_file)
+        self.Xvalid = pd.read_pickle(self.Xvalid_file)
+        self.yvalid = pd.read_pickle(self.yvalid_file)
+        self.Xtest = pd.read_pickle(self.Xtest_file)
+        self.ytest = pd.read_pickle(self.ytest_file)
+        self.ztrain = pd.read_pickle(self.ztrain_file)
+        self.zvalid = pd.read_pickle(self.zvalid_file)
+        self.ztest = pd.read_pickle(self.ztest_file)
 
     def build_params(self):
         params = dict()
